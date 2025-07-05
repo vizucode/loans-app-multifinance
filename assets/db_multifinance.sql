@@ -57,6 +57,7 @@ CREATE TABLE customer_loans (
     interest_rate DECIMAL(5, 4) NOT NULL,
     admin_fee_amount DECIMAL(15, 2) NOT NULL,
     interest_amount DECIMAL(15, 2) NOT NULL,
+    installment_amount DECIMAL(15, 2) NOT NULL,
     total_installment_amount DECIMAL(15, 2) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

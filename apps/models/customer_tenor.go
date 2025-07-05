@@ -8,7 +8,7 @@ type CustomerTenors struct {
 	ID              string    `gorm:"type:uuid;default:uuid_generate_v4();primaryKey"`
 	CustomerID      string    `gorm:"type:uuid;column:customer_id"`
 	TenorID         string    `gorm:"type:uuid;column:tenor_id"`
-	LimitLoanAmount int       `gorm:"column:limit_loan_amount"`
+	LimitLoanAmount float64   `gorm:"column:limit_loan_amount"`
 	CreatedAt       time.Time `gorm:"column:created_at"`
 	UpdatedAt       time.Time `gorm:"column:updated_at"`
 

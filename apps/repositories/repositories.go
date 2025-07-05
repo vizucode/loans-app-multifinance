@@ -15,9 +15,14 @@ type IDatabase interface {
 	// customers loan
 	CreateCustomerTenor(ctx context.Context, payload models.CustomerTenors) (err error)
 	GetAllCustomerTenor(ctx context.Context, customerID string) (resp []models.CustomerTenors, err error)
+	GetCustomerLimitTenor(ctx context.Context, customerID string, tenorMonth int) (resp models.CustomerTenors, err error)
 
 	// Tenors
 	GetAllTenor(ctx context.Context) (resp []models.Tenor, err error)
+
+	// Customer Loans
+	CreateCustomerLoan(ctx context.Context, payload models.CustomerLoans) (err error)
+	CountLimitRemainingTenorMonthLoan(ctx context.Context, customerID string, tenorMonth int) (resp int, err error)
 
 	// Token
 	CreateUserToken(ctx context.Context, payload models.Tokens) (err error)

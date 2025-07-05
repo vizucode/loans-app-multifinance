@@ -30,17 +30,10 @@
 1. Clone the repository
 2. Run `docker compose up -d` to start the services
 
-## How to use migrations
-The migration will run using [golang-migrate](https://github.com/golang-migrate/migrate)
-1. Run `make migrate-up version={target_migrate_version}` to migrate up to the target version
-2. Run `make migrate-down` to migrate down which will rollback to the last migration
-3. Run `make migrate-clean version={target_migrate_version}` to reset the migration to the target version which is the dirty migration.
-4. Run `make migrate-status` to get the current version of the migration
-5. Run `make migrate-reset` to rollback all migration to the initial version
-6. Run `make migrate-all` to migrate all migration to the latest version
 
 ## ERD Documentations
-Click this link to see the [ERD documentations](https://dbdocs.io/zen%20dev/PrivyCMS)
+![ERD Picture](/assets/image.png)
 
 ## API Specification
 Click this link to see the [API documentation](https://apidog.com/apidoc/docs-site/753332)
+![Swagger](/assets/study-case.openapi.json)

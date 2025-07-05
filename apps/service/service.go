@@ -13,3 +13,7 @@ type IAuthService interface {
 	FirstCustomer(ctx context.Context) (resp domain.ResponseCustomer, err error)
 	RefreshToken(ctx context.Context, accessToken string, refreshToken string) (resp domain.ResponseSignIn, err error)
 }
+
+type ILoans interface {
+	CreateLoan(ctx context.Context, req domain.RequestLoans) (resp domain.ResponseLoans, err error)
+}

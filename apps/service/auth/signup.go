@@ -104,7 +104,7 @@ func (s *auth) SignUp(ctx context.Context, req domain.RequestCustomer) (err erro
 			ID:              uuid.New().String(),
 			CustomerID:      userId,
 			TenorID:         tenor.ID,
-			LimitLoanAmount: randomAmount,
+			LimitLoanAmount: float64(randomAmount),
 		})
 		if err != nil {
 			logger.Log.Error(ctx, err)

@@ -8,6 +8,7 @@ import (
 	"multifinancetest/apps/repositories/s3storage"
 	routerRest "multifinancetest/apps/router/rest"
 	authsvc "multifinancetest/apps/service/auth"
+	"multifinancetest/apps/service/loan"
 	errorhandler "multifinancetest/helpers/error_handler"
 
 	"github.com/go-playground/validator/v10"
@@ -68,11 +69,14 @@ func main() {
 		validator10,
 	)
 
+	loanSvc := loan.NewLoan(postgreDB)
+
 	restRouter := routerRest.NewRest(
 		security.NewSecurity(
 			postgreDB,
 		),
 		authSvc,
+		loanSvc,
 	)
 
 	app := server.NewService(

@@ -13,15 +13,18 @@ import (
 type rest struct {
 	mw          middlewares.IMiddleware
 	authService service.IAuthService
+	loanService service.ILoans
 }
 
 func NewRest(
 	mw middlewares.IMiddleware,
 	authService service.IAuthService,
+	loanService service.ILoans,
 ) *rest {
 	return &rest{
 		mw:          mw,
 		authService: authService,
+		loanService: loanService,
 	}
 }
 
@@ -34,6 +37,9 @@ func (r *rest) Router(app fiber.Router) {
 	v1.Post("/refresh-token", r.RefreshToken)
 	v1.Get("/customer/profile", r.mw.AuthMiddleware, r.GetProfile)
 	v1.Post("/signout", r.mw.AuthMiddleware, r.Signout)
+
+	// loan endpoint
+	v1.Post("/customer/loan", r.mw.AuthMiddleware, r.CreateLoan)
 }
 
 func (rest *rest) ResponseJson(
