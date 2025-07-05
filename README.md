@@ -20,11 +20,10 @@
 
 ## Prerequisites
 1. Please read the docs carefully
-2. Installed [Postgres](https://www.postgresql.org/download/) on your machine
+2. Installed [Mysql](https://www.mysql.com/downloads/) on your machine
 3. Add your env to .env file or set it manually in your machine
 4. Install [docker](https://docs.docker.com/get-started/introduction/) and [docker compose](https://docs.docker.com/compose/install/)
 5. Install [Makefile](https://www.gnu.org/software/make/manual/make.html) to your machine
-6. Install [golang-migrate](https://github.com/golang-migrate/migrate) to your machine
 
 ## Instalation
 1. Clone the repository
