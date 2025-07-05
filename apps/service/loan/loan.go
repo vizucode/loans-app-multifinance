@@ -2,14 +2,21 @@ package loan
 
 import (
 	"multifinancetest/apps/repositories"
+
+	"github.com/go-playground/validator/v10"
 )
 
-type Loan struct {
-	db repositories.IDatabase
+type loan struct {
+	db        repositories.IDatabase
+	validator *validator.Validate
 }
 
-func NewLoan(db repositories.IDatabase) *Loan {
-	return &Loan{
-		db: db,
+func NewLoan(
+	db repositories.IDatabase,
+	validator *validator.Validate,
+) *loan {
+	return &loan{
+		db:        db,
+		validator: validator,
 	}
 }

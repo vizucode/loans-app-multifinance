@@ -33,3 +33,21 @@ func (r *rest) CreateLoan(c *fiber.Ctx) error {
 		domain.Metadata{},
 	)
 }
+
+func (r *rest) GetCustomerLimitLoan(c *fiber.Ctx) error {
+
+	ctx, _, _ := security.ExtractUserContextFiber(c)
+
+	resultCustomerLoan, err := r.loanService.GetLimitLoans(ctx)
+	if err != nil {
+		logger.Log.Error(ctx, err)
+		return err
+	}
+
+	return r.ResponseJson(c,
+		http.StatusOK,
+		resultCustomerLoan,
+		"Successfully Get Loan",
+		domain.Metadata{},
+	)
+}

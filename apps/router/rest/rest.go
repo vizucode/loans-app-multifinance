@@ -37,6 +37,7 @@ func (r *rest) Router(app fiber.Router) {
 	v1.Post("/refresh-token", r.RefreshToken)
 	v1.Get("/customer/profile", r.mw.AuthMiddleware, r.GetProfile)
 	v1.Post("/signout", r.mw.AuthMiddleware, r.Signout)
+	v1.Get("/customer/limit", r.mw.AuthMiddleware, r.GetCustomerLimitLoan)
 
 	// loan endpoint
 	v1.Post("/customer/loan", r.mw.AuthMiddleware, r.CreateLoan)

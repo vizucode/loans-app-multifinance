@@ -38,3 +38,5 @@ func (uc *auth) FirstCustomer(ctx context.Context) (resp domain.ResponseCustomer
 
 	return resp, nil
 }
+
+

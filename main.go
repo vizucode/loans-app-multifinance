@@ -69,7 +69,10 @@ func main() {
 		validator10,
 	)
 
-	loanSvc := loan.NewLoan(postgreDB)
+	loanSvc := loan.NewLoan(
+		postgreDB,
+		validator10,
+	)
 
 	restRouter := routerRest.NewRest(
 		security.NewSecurity(

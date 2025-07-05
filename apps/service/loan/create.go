@@ -13,7 +13,7 @@ import (
 	"github.com/vizucode/gokit/utils/errorkit"
 )
 
-func (uc *Loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp domain.ResponseLoans, err error) {
+func (uc *loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp domain.ResponseLoans, err error) {
 	var (
 		adminFee     float64 = 0.1
 		interestRate float64 = 0.5
@@ -65,7 +65,13 @@ func (uc *Loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp d
 	return resp, err
 }
 
-func (uc *Loan) validateLoan(ctx context.Context, req domain.RequestLoans, customerID string) (err error) {
+func (uc *loan) validateLoan(ctx context.Context, req domain.RequestLoans, customerID string) (err error) {
+
+	err = uc.validator.StructCtx(ctx, req)
+	if err != nil {
+		return err
+	}
+
 	customerLimit, err := uc.db.GetCustomerLimitTenor(ctx, customerID, req.PickedTenor)
 	if err != nil {
 		logger.Log.Error(ctx, err)
