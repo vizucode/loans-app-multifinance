@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package fcm;
+
+option go_package = "gitlab.com/tixia-backend/tixia-backend-core/client";
+
+service FcmService {
+  rpc SendNotification (FcmRequest) returns (FcmResponse);
+}
+
+message FcmRequest {
+  repeated string tokens = 1;
+  string title = 2;
+  string body = 3; 
+  string image_url = 4; 
+  map<string, string> data = 5;
+}
+
+message FcmResponse {
+  bool success = 1;
+  string message = 2;
+  int32 success_count = 3;
+  int32 failure_count = 4; 
+  repeated ErrorDetail errors = 5;
+}
+
+message ErrorDetail {
+  string code = 1;
+  string message = 2;
+}

@@ -1,0 +1,13 @@
+package statuses
+
+const (
+	ARCHIVED  = "ARCHIVED"
+	DRAFT     = "DRAFT"
+	PUBLISHED = "PUBLISHED"
+
+	ACTIVE     = "ACTIVE"
+	NON_ACTIVE = "NON_ACTIVE"
+
+	LANG_EN = "ENGLISH"
+	LANG_ID = "INDONESIAN"
+)

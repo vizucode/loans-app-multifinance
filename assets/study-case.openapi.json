@@ -1,0 +1,513 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "study-case",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/v1/customer/profile": {
+      "get": {
+        "summary": "Customer Profile",
+        "deprecated": false,
+        "description": "Endpoint ini digunakan untuk mengambil data diri customer",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "legal_name": {
+                          "type": "string"
+                        },
+                        "national_identity": {
+                          "type": "string"
+                        },
+                        "born_at": {
+                          "type": "string"
+                        },
+                        "date_birth": {
+                          "type": "string"
+                        },
+                        "national_identity_card_image": {
+                          "type": "string"
+                        },
+                        "selfie_image": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "legal_name",
+                        "national_identity",
+                        "born_at",
+                        "date_birth",
+                        "national_identity_card_image",
+                        "selfie_image"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status_code",
+                    "message",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "status_code": "20000",
+                  "message": "Successful get transaction",
+                  "data": {
+                    "email": "haruki.tanaka@example.jp",
+                    "legal_name": "田中 晴輝",
+                    "national_identity": "1300012345678901",
+                    "born_at": "Tokyo",
+                    "date_birth": "1988-11-15",
+                    "national_identity_card_image": "images/id_japan/haruki_tanaka_id_09876.jpg",
+                    "selfie_image": "images/selfie/haruki_tanaka_selfie_09876.jpg",
+                    "salary": 350000
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/customer/signin": {
+      "post": {
+        "summary": "Sign In",
+        "deprecated": false,
+        "description": "Endpoint ini digunakan untuk login",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "national_identity_number": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "national_identity_number",
+                  "password"
+                ]
+              },
+              "example": {
+                "national_identity_number": "1300012345678901",
+                "date_birth": "1988-11-15"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "legal_name": {
+                          "type": "string"
+                        },
+                        "national_identity": {
+                          "type": "string"
+                        },
+                        "born_at": {
+                          "type": "string"
+                        },
+                        "date_birth": {
+                          "type": "string"
+                        },
+                        "national_identity_card_image": {
+                          "type": "string"
+                        },
+                        "selfie_image": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "legal_name",
+                        "national_identity",
+                        "born_at",
+                        "date_birth",
+                        "national_identity_card_image",
+                        "selfie_image"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status_code",
+                    "message",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "status_code": "20000",
+                  "message": "Successful signin",
+                  "data": {
+                    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvZG9oIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+                    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvZG9oIiwiaWF0IjoxNTE2MjM5MDIyfQ.NklKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5b",
+                    "access_token_expired_at": "2025-07-04T12:01:52Z"
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/customer/loans": {
+      "get": {
+        "summary": "Customer Loans",
+        "deprecated": false,
+        "description": "Endpoint ini digunakan untuk mengambil data pinjaman, tenor, dan sisa pinjaman",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loan_id": {
+                            "type": "string"
+                          },
+                          "loan_month": {
+                            "type": "integer"
+                          },
+                          "total_loan_amount": {
+                            "type": "integer"
+                          },
+                          "remaining_loan_amount": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "loan_id",
+                          "loan_month",
+                          "total_loan_amount",
+                          "remaining_loan_amount"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "status_code",
+                    "message",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "status_code": "20000",
+                  "message": "Successful get loans",
+                  "data": [
+                    {
+                      "loan_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+                      "loan_month": 1,
+                      "total_loan_amount": 1000000,
+                      "remaining_loan_amount": 100000
+                    },
+                    {
+                      "loan_id": "b2c3d4e5-f6a7-8901-2345-67890abcdef0",
+                      "loan_month": 2,
+                      "total_loan_amount": 2000000,
+                      "remaining_loan_amount": 1500000
+                    },
+                    {
+                      "loan_id": "c3d4e5f6-a7b8-9012-3456-7890abcdef01",
+                      "loan_month": 3,
+                      "total_loan_amount": 3500000,
+                      "remaining_loan_amount": 2000000
+                    },
+                    {
+                      "loan_id": "d4e5f6a7-b8c9-0123-4567-890abcdef012",
+                      "loan_month": 6,
+                      "total_loan_amount": 5000000,
+                      "remaining_loan_amount": 4500000
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/customer/loan": {
+      "post": {
+        "summary": "Request Loans",
+        "deprecated": false,
+        "description": "Endpoint ini digunakan untuk melakukan pengajuan pinjaman",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "otr": {
+                    "type": "integer"
+                  },
+                  "asset_name": {
+                    "type": "string"
+                  },
+                  "picked_tenor": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "otr",
+                  "asset_name",
+                  "picked_tenor"
+                ]
+              },
+              "example": {
+                "otr": 20000,
+                "asset_name": "BUGATI VEYRON CHIRON",
+                "picked_tenor": 3
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "legal_name": {
+                          "type": "string"
+                        },
+                        "national_identity": {
+                          "type": "string"
+                        },
+                        "born_at": {
+                          "type": "string"
+                        },
+                        "date_birth": {
+                          "type": "string"
+                        },
+                        "national_identity_card_image": {
+                          "type": "string"
+                        },
+                        "selfie_image": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "legal_name",
+                        "national_identity",
+                        "born_at",
+                        "date_birth",
+                        "national_identity_card_image",
+                        "selfie_image"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status_code",
+                    "message",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "status_code": "20000",
+                  "message": "Successful request loans",
+                  "data": {
+                    "otr": 25000000,
+                    "asset_name": "BUGATI VEYRRON CHIRON",
+                    "picked_tenor": 3,
+                    "admin_fee": 250000,
+                    "interest_fee": 500000,
+                    "total_monthly_instalament": 9083333
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/customer/loan/history": {
+      "get": {
+        "summary": "Customer Loans History",
+        "deprecated": false,
+        "description": "Endpoint ini digunakan untuk menampilkan riwayat pinjaman",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "loan_id": {
+                            "type": "string"
+                          },
+                          "loan_month": {
+                            "type": "integer"
+                          },
+                          "total_loan_amount": {
+                            "type": "integer"
+                          },
+                          "remaining_loan_amount": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "loan_id",
+                          "loan_month",
+                          "total_loan_amount",
+                          "remaining_loan_amount"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "status_code",
+                    "message",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "status_code": "20000",
+                  "message": "Successful get loans",
+                  "data": [
+                    {
+                      "loan_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+                      "loan_month": 1,
+                      "total_loan_amount": 1000000,
+                      "remaining_loan_amount": 100000
+                    },
+                    {
+                      "loan_id": "b2c3d4e5-f6a7-8901-2345-67890abcdef0",
+                      "loan_month": 2,
+                      "total_loan_amount": 2000000,
+                      "remaining_loan_amount": 1500000
+                    },
+                    {
+                      "loan_id": "c3d4e5f6-a7b8-9012-3456-7890abcdef01",
+                      "loan_month": 3,
+                      "total_loan_amount": 3500000,
+                      "remaining_loan_amount": 2000000
+                    },
+                    {
+                      "loan_id": "d4e5f6a7-b8c9-0123-4567-890abcdef012",
+                      "loan_month": 6,
+                      "total_loan_amount": 5000000,
+                      "remaining_loan_amount": 4500000
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}

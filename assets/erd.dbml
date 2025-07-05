@@ -1,0 +1,68 @@
+Project MultifinanceLoans {
+  database_type: 'MySQL'
+  Note: 'Multifinance Loans'
+}
+
+Table customers {
+  id uuid [pk]
+  email varchar
+  password text
+  full_name varchar
+  legal_name varchar
+  date_birth date
+  born_at varchar
+  salary decimal
+  national_identity_number varchar
+  national_identity_image_url varchar
+  selfie_image_url varchar
+  created_at datetime
+  updated_at datetime
+}
+
+Table customer_tenors {
+  id uuid [pk]
+  customer_id uuid
+  tenor_id uuid
+  limit_loan_amount decimal
+  created_at datetime
+  updated_at datetime
+}
+
+Table tenors {
+  id uuid [pk]
+  total_month uint
+  created_at datetime
+  updated_at datetime
+}
+
+Table customer_loans{
+  id uuid [pk]
+  customer_id uuid
+  asset_name varchar
+  otr decimal
+  total_month uint
+  interest_rate decimal
+  admin_fee_amount decimal
+  interest_amount decimal
+  total_installment_amount decimal
+  created_at datetime
+  updated_at datetime
+}
+
+Table tokens {
+  id uuid [pk]
+  customer_id uuid
+  refresh_token text
+  access_tokken text
+  refresh_token_revoked bool
+  access_token_revoked bool
+  access_token_expired_at datetime
+  refresh_token_expired_at datetimee
+  created_at datetime
+  updated_at datetime
+}
+
+Ref: "customers"."id" < "tokens"."customer_id"
+Ref: "customers"."id" < "customer_loans"."customer_id"
+Ref: "customers"."id" < "customer_tenors"."customer_id"
+Ref: "tenors"."id" < "customer_tenors"."tenor_id"
