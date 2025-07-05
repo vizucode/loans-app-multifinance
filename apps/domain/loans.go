@@ -23,3 +23,13 @@ type ResponseLimitLoans struct {
 	TotalLoanAmount     float64 `json:"total_loan_amount"`
 	RemainingLoanAmount float64 `json:"remaining_loan_amount"`
 }
+
+type ResponseHistoryLoans struct {
+	LoanId             string  `json:"loan_id"`
+	LoanMonth          int     `json:"loan_month"`
+	Otr                float64 `json:"otr"`
+	AssetName          string  `json:"asset_name"`
+	MonthlyInstallment float64 `json:"monthly_installment"`
+	TotalInstallment   float64 `json:"total_installment"`
+	CreatedAt          string  `json:"created_at"`
+}

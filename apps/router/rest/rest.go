@@ -38,6 +38,7 @@ func (r *rest) Router(app fiber.Router) {
 	v1.Get("/customer/profile", r.mw.AuthMiddleware, r.GetProfile)
 	v1.Post("/signout", r.mw.AuthMiddleware, r.Signout)
 	v1.Get("/customer/limit", r.mw.AuthMiddleware, r.GetCustomerLimitLoan)
+	v1.Get("/customer/loan/history", r.mw.AuthMiddleware, r.GetCustomerHistoryLoan)
 
 	// loan endpoint
 	v1.Post("/customer/loan", r.mw.AuthMiddleware, r.CreateLoan)

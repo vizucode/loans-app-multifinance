@@ -2,7 +2,11 @@ package psql
 
 import (
 	"context"
+	"errors"
 	"multifinancetest/apps/models"
+
+	"github.com/vizucode/gokit/logger"
+	"gorm.io/gorm"
 )
 
 func (psql *psql) CreateCustomerLoan(ctx context.Context, payload models.CustomerLoans) (err error) {
@@ -42,4 +46,32 @@ func (psql *psql) CountLimitRemainingTenorMonthLoan(ctx context.Context, custome
 	}
 
 	return int(total), nil
+}
+
+func (psql *psql) GetCustomerLoans(ctx context.Context, customerId string, filter models.Filter) (resp []models.CustomerLoans, err error) {
+
+	tx := psql.db.Debug().WithContext(ctx).Model(&models.CustomerLoans{}).Where("customer_id = ?", customerId).Order("created_at DESC")
+
+	if filter.Where["search"].(string) != "" {
+		tx = tx.Where("asset_name = ?", filter.Where["search"].(string))
+	}
+
+	if filter.Limit > 0 {
+		tx = tx.Limit(filter.Limit)
+	}
+
+	if filter.Page > 0 {
+		tx = tx.Offset((filter.Page - 1) * filter.Limit)
+	}
+
+	err = tx.Find(&resp).Error
+	if err != nil {
+		logger.Log.Error(ctx, err)
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return resp, nil
+		}
+		return resp, err
+	}
+
+	return resp, nil
 }

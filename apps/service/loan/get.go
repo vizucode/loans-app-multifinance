@@ -4,8 +4,10 @@ import (
 	"context"
 	"multifinancetest/apps/domain"
 	"multifinancetest/apps/middlewares/security"
+	"multifinancetest/apps/models"
 	"multifinancetest/helpers/constants/rpcstd"
 	"net/http"
+	"time"
 
 	"github.com/vizucode/gokit/logger"
 	"github.com/vizucode/gokit/utils/errorkit"
@@ -41,4 +43,36 @@ func (uc *loan) GetLimitLoans(ctx context.Context) (resp []domain.ResponseLimitL
 	}
 
 	return resp, err
+}
+
+func (uc *loan) GetHistoryLoans(ctx context.Context, filter domain.Filter) (resp []domain.ResponseHistoryLoans, err error) {
+
+	currentUser, found := security.ExtractUserContext(ctx)
+	if !found {
+		return resp, errorkit.NewErrorStd(http.StatusUnauthorized, rpcstd.ABORTED, "user not found")
+	}
+
+	resultHistoryPlan, err := uc.db.GetCustomerLoans(ctx, currentUser.Id, models.Filter{
+		Limit: filter.Limit,
+		Page:  filter.Page,
+		Where: filter.Where,
+	})
+	if err != nil {
+		logger.Log.Error(ctx, err)
+		return resp, err
+	}
+
+	for _, historyPlan := range resultHistoryPlan {
+		resp = append(resp, domain.ResponseHistoryLoans{
+			LoanId:             historyPlan.ID,
+			LoanMonth:          historyPlan.TotalMonth,
+			Otr:                historyPlan.Otr,
+			AssetName:          historyPlan.AssetName,
+			MonthlyInstallment: historyPlan.InstallmentAmount,
+			TotalInstallment:   historyPlan.TotalInstallmentAmount,
+			CreatedAt:          historyPlan.CreatedAt.UTC().Format(time.RFC3339),
+		})
+	}
+
+	return resp, nil
 }

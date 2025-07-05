@@ -17,4 +17,5 @@ type IAuthService interface {
 type ILoans interface {
 	CreateLoan(ctx context.Context, req domain.RequestLoans) (resp domain.ResponseLoans, err error)
 	GetLimitLoans(ctx context.Context) (resp []domain.ResponseLimitLoans, err error)
+	GetHistoryLoans(ctx context.Context, filter domain.Filter) (resp []domain.ResponseHistoryLoans, err error)
 }
