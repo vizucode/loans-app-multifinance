@@ -22,6 +22,7 @@ type IDatabase interface {
 
 	// Customer Loans
 	CreateCustomerLoan(ctx context.Context, payload models.CustomerLoans) (err error)
+	CreateTrxCustomerLoan(ctx context.Context, customerID string, tenorMonth int, payload models.CustomerLoans) (err error)
 	CountLimitRemainingTenorMonthLoan(ctx context.Context, customerID string, tenorMonth int) (resp int, err error)
 	GetCustomerLoans(ctx context.Context, customerId string, filter models.Filter) (resp []models.CustomerLoans, err error)
 

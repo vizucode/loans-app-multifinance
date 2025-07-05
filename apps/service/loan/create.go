@@ -23,12 +23,6 @@ func (uc *loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp d
 		return resp, errorkit.NewErrorStd(http.StatusUnauthorized, rpcstd.ABORTED, "user not found")
 	}
 
-	err = uc.validateLoan(ctx, req, currentUser.Id)
-	if err != nil {
-		logger.Log.Error(ctx, err)
-		return resp, err
-	}
-
 	interestAmount := req.Otr * interestRate * float64(req.PickedTenor)
 	adminFeeAmount := (adminFee * req.Otr)
 	totalLoan := req.Otr + interestAmount + adminFeeAmount
@@ -40,14 +34,9 @@ func (uc *loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp d
 		AssetName:              req.AssetName,
 		Otr:                    req.Otr,
 		TotalMonth:             req.PickedTenor,
-		InterestRate:           interestRate,
-		AdminFeeAmount:         adminFeeAmount,
-		InterestAmount:         interestAmount,
-		InstallmentAmount:      monthlyInstallment,
-		TotalInstallmentAmount: totalLoan,
 	}
 
-	err = uc.db.CreateCustomerLoan(ctx, loanModel)
+	err = uc.db.CreateTrxCustomerLoan(ctx, currentUser.Id, req.PickedTenor, loanModel)
 	if err != nil {
 		logger.Log.Error(ctx, err)
 		return resp, err
