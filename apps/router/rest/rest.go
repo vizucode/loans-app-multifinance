@@ -32,6 +32,7 @@ func (r *rest) Router(app fiber.Router) {
 	v1.Post("/signup", r.SignUp)
 	v1.Post("/signin", r.SignIn)
 	v1.Post("/refresh-token", r.RefreshToken)
+	v1.Get("/customer/profile", r.mw.AuthMiddleware, r.GetProfile)
 	v1.Post("/signout", r.mw.AuthMiddleware, r.Signout)
 }
 

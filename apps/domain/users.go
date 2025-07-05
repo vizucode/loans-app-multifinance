@@ -15,7 +15,7 @@ type RequestCustomer struct {
 
 type ResponseCustomer struct {
 	Email                    string  `json:"email" validate:"required,email"`                     // Email harus ada dan formatnya email
-	Password                 string  `json:"password" validate:"required,min=8"`                  // Password harus ada dan minimal 8 karakter
+	Password                 string  `json:"password,omitempty" validate:"required,min=8"`        // Password harus ada dan minimal 8 karakter
 	FullName                 string  `json:"full_name" validate:"required"`                       // Nama lengkap harus ada
 	LegalName                string  `json:"legal_name" validate:"required"`                      // Pointer string untuk nullable
 	DateBirth                string  `json:"date_birth" validate:"required,datetime=2006-01-02"`  // Tanggal lahir harus ada dan format YYYY-MM-DD

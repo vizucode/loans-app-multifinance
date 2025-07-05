@@ -13,6 +13,23 @@ import (
 	"github.com/vizucode/gokit/utils/errorkit"
 )
 
+func (r *rest) GetProfile(c *fiber.Ctx) error {
+	ctx, _, _ := security.ExtractUserContextFiber(c)
+
+	resultCustomer, err := r.authService.FirstCustomer(ctx)
+	if err != nil {
+		logger.Log.Error(ctx, err)
+		return err
+	}
+
+	return r.ResponseJson(c,
+		http.StatusOK,
+		resultCustomer,
+		"Successfully Get Profile",
+		domain.Metadata{},
+	)
+}
+
 func (r *rest) SignIn(c *fiber.Ctx) error {
 	ctx := c.UserContext()
 
