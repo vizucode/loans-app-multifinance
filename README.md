@@ -37,5 +37,4 @@
 ![Arsistektur Sistem](/assets/arsitektur.png)
 
 ## API Specification
-Click this link to see the [API documentation](https://apidog.com/apidoc/docs-site/753332)
-![Swagger](/assets/study-case.openapi.json)
+Click this link to see the ![Swagger](/assets/study-case.openapi.json)
