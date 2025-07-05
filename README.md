@@ -32,7 +32,10 @@
 
 
 ## ERD Documentations
-![ERD Picture](/assets/image.png)
+![ERD Picture](/assets/erd.png)
+
+## Arsitektur Sistem
+![Arsistektur Sistem](/assets/arsitektur.png)
 
 ## API Specification
 Click this link to see the [API documentation](https://apidog.com/apidoc/docs-site/753332)
