@@ -90,3 +90,9 @@ CREATE TABLE tokens (
     INDEX idx_tokens_access_token (access_token(255)),
     INDEX idx_tokens_customer_id (customer_id)
 );
+
+INSERT INTO tenors (id, total_month, created_at, updated_at) VALUES
+    (UUID(), 1, NOW(), NOW()),
+    (UUID(), 2, NOW(), NOW()),
+    (UUID(), 3, NOW(), NOW()),
+    (UUID(), 6, NOW(), NOW());

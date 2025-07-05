@@ -12,6 +12,13 @@ type IDatabase interface {
 	FirstCustomerById(ctx context.Context, id string) (resp models.Customer, err error)
 	FirstCustomerByEmail(ctx context.Context, email string) (resp models.Customer, err error)
 
+	// customers loan
+	CreateCustomerTenor(ctx context.Context, payload models.CustomerTenors) (err error)
+	GetAllCustomerTenor(ctx context.Context, customerID string) (resp []models.CustomerTenors, err error)
+
+	// Tenors
+	GetAllTenor(ctx context.Context) (resp []models.Tenor, err error)
+
 	// Token
 	CreateUserToken(ctx context.Context, payload models.Tokens) (err error)
 	UpdateUserTokenByRefreshToken(ctx context.Context, refreshToken string, payload models.Tokens) (err error)

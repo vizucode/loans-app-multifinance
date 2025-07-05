@@ -3,6 +3,7 @@ package auth
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"multifinancetest/apps/domain"
 	"multifinancetest/apps/models"
 	"multifinancetest/helpers/constants/rpcstd"
@@ -68,8 +69,9 @@ func (s *auth) SignUp(ctx context.Context, req domain.RequestCustomer) (err erro
 		return err
 	}
 
+	userId := uuid.New().String()
 	err = s.db.CreateCustomer(ctx, models.Customer{
-		ID:                       uuid.New().String(),
+		ID:                       userId,
 		Email:                    req.Email,
 		Password:                 string(hashedPassword),
 		FullName:                 req.FullName,
@@ -84,6 +86,29 @@ func (s *auth) SignUp(ctx context.Context, req domain.RequestCustomer) (err erro
 	if err != nil {
 		logger.Log.Error(ctx, err)
 		return err
+	}
+
+	// insert customer tenor
+	resultTenor, err := s.db.GetAllTenor(ctx)
+	if err != nil {
+		logger.Log.Error(ctx, err)
+		return err
+	}
+
+	for _, tenor := range resultTenor {
+		r := rand.New(rand.NewSource(time.Now().UnixNano()))
+		min := 100
+		max := 500_000
+		randomAmount := r.Intn(max-min+1) + min
+		err = s.db.CreateCustomerTenor(ctx, models.CustomerTenors{
+			ID:              uuid.New().String(),
+			CustomerID:      userId,
+			TenorID:         tenor.ID,
+			LimitLoanAmount: randomAmount,
+		})
+		if err != nil {
+			logger.Log.Error(ctx, err)
+		}
 	}
 
 	return nil
