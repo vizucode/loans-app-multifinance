@@ -41,6 +41,8 @@ Saya sengaja hanya menulis unit test pada method CreateLoan karena menurut saya,
 
 ## Arsitektur Sistem
 ![Arsistektur Sistem](/assets/arsitektur.png)
+Arsitektur ini secara umum sudah cukup aman untuk mencapai tingkat ketersediaan (availability) 99,9%, atau sekitar 8 jam downtime per tahun, selama dijalankan dengan praktik operasional yang baik. Dengan pembagian beban melalui Nginx sebagai load balancer di VPS-1 dan pemisahan layanan data di VPS-2 (Supabase dan MySQL), sistem ini sudah memiliki fondasi yang solid untuk menjaga kestabilan aplikasi. Selama setiap komponen (APP-1, APP-2, APP-3, Nginx, dan database) dijalankan dengan mekanisme auto-restart, memiliki sistem monitoring kesehatan, serta backup database yang rutin dan teruji, maka arsitektur ini sudah mencukupi untuk menjamin ketersediaan layanan tingkat menengah secara andal. Asalkan koneksi antar VPS stabil dan recovery plan disiapkan dengan baik, arsitektur ini sudah layak untuk digunakan dalam produk digital yang menargetkan uptime 99,9%.
+
 
 ## API Specification
 Click this link to see the ![Swagger](/assets/study-case.openapi.json)
