@@ -35,6 +35,8 @@ Saya sengaja hanya menulis unit test pada method CreateLoan karena menurut saya,
 1. Clone the repository
 2. Run `docker compose up -d` to start the services
 
+## OWASP Standard
+Aplikasi yang saya bangun ini udah saya siapkan dengan pendekatan keamanan yang merujuk ke standar OWASP. Buat autentikasi, saya pakai JWT lengkap dengan refresh token, jadi user tetap bisa nyaman login tanpa harus kompromi keamanan. Di level database, saya udah pakai ORM, biar query-nya lebih aman dan terhindar dari SQL Injection, salah satu serangan yang sering masuk dalam top 10 OWASP. Untuk monitoring dan pelacakan error, saat ini saya masih pakai basic logging dari Go, tapi strukturnya udah saya buat rapi dan siap banget kalau nanti mau diintegrasikan ke sistem log monitoring seperti ELK, Grafana, atau Sentry. Jadi walaupun masih tahap awal, pondasi aplikasinya udah mengarah ke best practice standar keamanan OWASP.
 
 ## ERD Documentations
 ![ERD Picture](/assets/erd.png)
