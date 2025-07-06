@@ -1,5 +1,11 @@
 # README!
 
+# Unit Test
+Saya sengaja hanya menulis unit test pada method CreateLoan karena menurut saya, di situlah titik paling penting dalam proses transaksi pinjaman. Method ini menangani proses inti—mulai dari validasi hingga penyimpanan data ke database—dan kalau sampai ada yang salah di sini, dampaknya bisa sangat besar. Saya nggak fokus untuk menulis test di semua tempat, karena saya percaya testing itu harus strategis, bukan asal banyak.
+```bash
+/apps/service/loan/create_test.go
+```
+
 ## Environtment
 | Name | Description | Example |
 | --- | --- | --- |

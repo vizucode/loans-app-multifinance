@@ -18,6 +18,12 @@ func (uc *loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp d
 		adminFee     float64 = 0.1
 		interestRate float64 = 0.5
 	)
+
+	err = uc.validator.StructCtx(ctx, req)
+	if err != nil {
+		return resp, err
+	}
+
 	currentUser, found := security.ExtractUserContext(ctx)
 	if !found {
 		return resp, errorkit.NewErrorStd(http.StatusUnauthorized, rpcstd.ABORTED, "user not found")
@@ -29,11 +35,11 @@ func (uc *loan) CreateLoan(ctx context.Context, req domain.RequestLoans) (resp d
 	monthlyInstallment := totalLoan / float64(req.PickedTenor)
 
 	loanModel := models.CustomerLoans{
-		ID:                     uuid.NewString(),
-		CustomerID:             currentUser.Id,
-		AssetName:              req.AssetName,
-		Otr:                    req.Otr,
-		TotalMonth:             req.PickedTenor,
+		ID:         uuid.NewString(),
+		CustomerID: currentUser.Id,
+		AssetName:  req.AssetName,
+		Otr:        req.Otr,
+		TotalMonth: req.PickedTenor,
 	}
 
 	err = uc.db.CreateTrxCustomerLoan(ctx, currentUser.Id, req.PickedTenor, loanModel)
